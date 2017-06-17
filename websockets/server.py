@@ -11,7 +11,8 @@ import logging
 
 from .compatibility import asyncio_ensure_future
 from .exceptions import InvalidHandshake, InvalidMessage, InvalidOrigin
-from .extensions import PerMessageDeflate, parse_extensions
+from .extensions.permessage_deflate import PerMessageDeflate
+from .extensions.utils import parse_extensions
 from .handshake import build_response, check_request
 from .http import USER_AGENT, build_headers, read_request
 from .protocol import CONNECTING, OPEN, WebSocketCommonProtocol
