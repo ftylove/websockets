@@ -1,4 +1,3 @@
-
 """
 The :mod:`websockets.server` module defines a simple WebSocket server API.
 
@@ -12,7 +11,7 @@ import logging
 from .compatibility import asyncio_ensure_future
 from .exceptions import InvalidHandshake, InvalidMessage, InvalidOrigin
 from .extensions.permessage_deflate import PerMessageDeflate
-from .extensions.utils import parse_extensions
+from .extensions.utils import parse_extension_list
 from .handshake import build_response, check_request
 from .http import USER_AGENT, build_headers, read_request
 from .protocol import CONNECTING, OPEN, WebSocketCommonProtocol
@@ -208,11 +207,11 @@ class WebSocketServerProtocol(WebSocketCommonProtocol):
         # TODO this doesn't allow configuring available extensions.
         extensions = get_header('Sec-WebSocket-Extensions')
         if extensions:
-            extensions = parse_extensions(extensions)
+            extensions = parse_extension_list(extensions)
             for extension in extensions:
                 extension, params = extension
                 if extension == 'permessage-deflate':
-                    return [PerMessageDeflate(False, params)]
+                    return [PerMessageDeflate(False, dict(params))]
         return []
 
     def process_subprotocol(self, get_header, available_subprotocols=None):
