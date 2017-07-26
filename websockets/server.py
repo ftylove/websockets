@@ -206,6 +206,7 @@ class WebSocketServerProtocol(WebSocketCommonProtocol):
         """
         # TODO this doesn't allow configuring available extensions.
         extensions = get_header('Sec-WebSocket-Extensions')
+        print(extensions)
         if extensions:
             extensions = parse_extension_list(extensions)
             for extension in extensions:

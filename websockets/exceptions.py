@@ -1,7 +1,9 @@
 __all__ = [
     'InvalidHandshake', 'InvalidHeader', 'InvalidMessage', 'InvalidOrigin',
-    'InvalidState', 'InvalidStatus', 'InvalidURI', 'ConnectionClosed',
-    'PayloadTooBig', 'WebSocketProtocolError',
+    'InvalidState', 'InvalidStatus', 'NegotiationError',
+    'InvalidParameterName', 'InvalidParameterValue', 'DuplicateParameter',
+    'InvalidURI', 'ConnectionClosed', 'PayloadTooBig',
+    'WebSocketProtocolError',
 ]
 
 
@@ -49,6 +51,34 @@ class InvalidStatus(InvalidHandshake):
         self.code = code
         message = 'Status code not 101: {}'.format(code)
         super().__init__(message)
+
+
+class NegotiationError(InvalidHandshake):
+    """
+    TODO
+
+    """
+
+
+class InvalidParameterName(NegotiationError):
+    """
+    TODO
+
+    """
+
+
+class InvalidParameterValue(NegotiationError):
+    """
+    TODO
+
+    """
+
+
+class DuplicateParameter(NegotiationError):
+    """
+    TODO
+
+    """
 
 
 class InvalidState(Exception):
